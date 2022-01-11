@@ -219,7 +219,7 @@
         <child>caster</child>
       </joint>
 
-      <plugin name='diff_drive' filename='libgazebo_ros_diff_drive_test.so'>
+      <plugin name='diff_drive' filename='libgazebo_ros_diff_drive.so'>
         <ros>
           <command-topic>cmd_vel</command-topic>
           <odometry-topic>odom</odometry-topic>
