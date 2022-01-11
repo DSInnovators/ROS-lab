@@ -57,12 +57,14 @@ rm -rf /opt/ros/foxy/lib/libgazebo_ros_diff_drive.so # remove the previously fet
 cp ~/PATH_TO_REPO/ROS2/gazebo-ros-plugins/build/libgazebo_ros_diff_drive.so /opt/ros/foxy/lib/libgazebo_ros_diff_drive.so 
 ```
 Use `sudo` command if necessary.
+
 6. Open a terminal, run the world file:
 ```
 cd ~/PATH_TO_REPO/ROS2/world
 gazebo --verbose gazebo_ros_diff_drive_demo.world
 ```
 A gazebo window will load with a differential drive robot.
+
 7. Open another terminal and run the publisher:
 ```
 cd ~/PATH_TO_REPO/ROS2/
