@@ -220,9 +220,7 @@
       </joint>
 
       <plugin name='diff_drive' filename='libgazebo_ros_diff_drive_test.so'>
-
         <ros>
-          
           <command-topic>cmd_vel</command-topic>
           <odometry-topic>odom</odometry-topic>
         </ros>
@@ -247,9 +245,6 @@
 
         <odometry_frame>odom_demo</odometry_frame>
         <robot_base_frame>chassis</robot_base_frame>
-
-        <!-- Set to true to publish transforms for the wheel links, defaults to false -->
-        <publish-wheelTF>true</publish-wheelTF>
 
         <!-- Set to true to publish transforms for the odometry, defaults to true -->
         <publish-odom>true</publish-odom>
