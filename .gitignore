@@ -49,8 +49,10 @@ test-results*.xml
 xunit-test-results.xml
 build/ci/performance/performance-results.json
 !build/
+
 build/*
 !build/build.xml
+
 debug*.log
 debugpy*.log
 pydevd*.log
