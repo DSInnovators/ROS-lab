@@ -10,7 +10,7 @@
 ### Check Environment Variables
 
 ```
-printenv | grep -i ROS
+$ printenv | grep -i ROS
 ```
 
 The response should be -
@@ -26,15 +26,15 @@ ROS_DISTRO=foxy
 ### Install gazebo_ros_pkgs
 Gazebo is installed alongside ROS2. In order to install [gazebo_ros_pkgs](http://gazebosim.org/tutorials?tut=ros2_installing&cat=connect_ros), run the following command: 
 ```
-sudo apt install ros-foxy-gazebo-ros-pkgs
+$ sudo apt install ros-foxy-gazebo-ros-pkgs
 ```
 Make sure you have some core tools installed: 
 ```
-sudo apt install ros-foxy-ros-core ros-foxy-geometry2
+$ sudo apt install ros-foxy-ros-core ros-foxy-geometry2
 ```
 To test if the **gazebo_ros_pkgs** was successfully installed, open a new terminal, source ROS2, and simulate a world file using the following command:
 ```
-gazebo --verbose /opt/ros/foxy/share/gazebo_plugins/worlds/gazebo_ros_diff_drive_demo.world
+$ gazebo --verbose /opt/ros/foxy/share/gazebo_plugins/worlds/gazebo_ros_diff_drive_demo.world
 ```
 You also need to have **python3** installed in your system.
 
@@ -46,34 +46,34 @@ We will build a custom plugin and refer to that **.so** object in our world file
 2. Navigate to `ROS2/gazebo-ros-plugins/`
 3. Run the following commands:
 ```
-mkdir build # create a build folder
-cd build # go to build folder
-cmake ../ # compile
-make
+$ mkdir build # create a build folder
+$ cd build # go to build folder
+$ cmake ../ # compile
+$ make
 ```
 4. A **.so** file will be created inside the *build* folder, namely `libgazebo_ros_diff_drive.so`.
 5. Copy and paste the folder to a location where the **.world** file will be able to refer it from
 ```
-rm -rf /opt/ros/foxy/lib/libgazebo_ros_diff_drive.so # remove the previously fetched (with ros-gazebo-ros-pkgs) diff drive .so file 
-cp ~/PATH_TO_REPO/ROS2/gazebo-ros-plugins/build/libgazebo_ros_diff_drive.so /opt/ros/foxy/lib/libgazebo_ros_diff_drive.so 
+$ rm -rf /opt/ros/foxy/lib/libgazebo_ros_diff_drive.so # remove the previously fetched (with ros-gazebo-ros-pkgs) diff drive .so file 
+$ cp ~/PATH_TO_REPO/ROS2/gazebo-ros-plugins/build/libgazebo_ros_diff_drive.so /opt/ros/foxy/lib/libgazebo_ros_diff_drive.so 
 ```
 Use `sudo` command if necessary.
 
 6. Open a terminal, run the world file:
 ```
-cd ~/PATH_TO_REPO/ROS2/world
-gazebo --verbose gazebo_ros_diff_drive_demo.world
+$ cd ~/PATH_TO_REPO/ROS2/world
+$ gazebo --verbose gazebo_ros_diff_drive_demo.world
 ```
 A gazebo window will load with a differential drive robot.
 
 7. Open another terminal and run the publisher:
 ```
-cd ~/PATH_TO_REPO/ROS2/
-python3 teleop_keyboard.py
+$ cd ~/PATH_TO_REPO/ROS2/
+$ python3 teleop_keyboard.py
 ```
 8. Run the following command to check if the subscriber and publisher are running smoothly:
 ```
-ros2 topic info --verbose /cmd_vel # cmd_vel is the name of the topic the publisher is publishing to and the subscriber is subscribing to
+$ ros2 topic info --verbose /cmd_vel # cmd_vel is the name of the topic the publisher is publishing to and the subscriber is subscribing to
 ```
 You should see a response like this:
 ```
@@ -112,7 +112,7 @@ QoS profile:
 
 9. See what sort of messages are published to the `/cmd_vel` topic:
 ```
-ros2 topic echo /cmd_vel
+$ ros2 topic echo /cmd_vel
 ```
 Every time you press the keys according to the instructions in terminal running `teleop_leyboard.py`, you'll see a response like below:
 ```
