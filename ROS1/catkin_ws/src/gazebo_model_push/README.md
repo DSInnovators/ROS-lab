@@ -41,7 +41,7 @@ First, if you installed Gazebo from debians, make sure you've installed the Gaze
 
 
 #### Installing and running the project
-To install test-automation, git clone the repo
+To install this plugin project, git clone the repo
 
     $ git clone https://github.com/DSInnovators/ROS-lab.git
     $ cd ROS-lab/ROS1/catkin_ws
