@@ -36,6 +36,7 @@ To test if the **gazebo_ros_pkgs** was successfully installed, open a new termin
 ```
 gazebo --verbose /opt/ros/foxy/share/gazebo_plugins/worlds/gazebo_ros_diff_drive_demo.world
 ```
+You also need to have **python3** installed in your system.
 
 ### Build custom plugin for differential drive robot
 
@@ -72,7 +73,7 @@ python3 teleop_keyboard.py
 ```
 8. Run the following command to check if the subscriber and publisher are running smoothly:
 ```
-ros2 topic in --verbose /cmd_vel # cmd_vel is the name of the topic the publisher is publishing to and the subscriber is subscribing to
+ros2 topic info --verbose /cmd_vel # cmd_vel is the name of the topic the publisher is publishing to and the subscriber is subscribing to
 ```
 You should see a response like this:
 ```
@@ -108,6 +109,33 @@ QoS profile:
   Liveliness: RMW_QOS_POLICY_LIVELINESS_AUTOMATIC
   Liveliness lease duration: 2147483651294967295 nanoseconds
 ```
+
+9. See what sort of messages are published to the `/cmd_vel` topic:
+```
+ros2 topic echo /cmd_vel
+```
+Every time you press the keys according to the instructions in terminal running `teleop_leyboard.py`, you'll see a response like below:
+```
+linear:
+  x: 0.5
+  y: 0.0
+  z: 0.0
+angular:
+  x: 0.0
+  y: 0.0
+  z: 0.0
+---
+linear:
+  x: 0.0
+  y: 0.0
+  z: 0.0
+angular:
+  x: 0.0
+  y: 0.0
+  z: 0.0
+---
+```
+
 
 
 
