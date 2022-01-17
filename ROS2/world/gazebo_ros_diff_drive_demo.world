@@ -82,6 +82,12 @@
               <radius>0.3</radius>
             </sphere>
           </geometry>
+          <material>
+            <ambient>0.1 0.5 1 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 0</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
         </visual>
         <collision name='collision'>
           <geometry>
@@ -131,6 +137,7 @@
               <radius>0.3</radius>
             </sphere>
           </geometry>
+          <material>red</material>
         </visual>
         <collision name='collision'>
           <geometry>
@@ -190,6 +197,57 @@
         </collision>
       </link>
 
+      <link name='camera_link'>
+      <!-- x y z roll pitch yaw -->
+        <pose frame=''>1 0 0.45 0 -0 0</pose> 
+        <inertial>
+          <mass>0.1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+        </inertial>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <sensor name='camera1' type='camera'>
+          <camera name="camera1">
+            <horizontal_fov>1.3962634</horizontal_fov>
+            <!-- <horizontal_fov>0.8</horizontal_fov> -->
+            <image>
+              <width>800</width>
+              <height>800</height>
+              <format>R8G8B8</format>
+            </image>
+            <clip>
+              <near>0.02</near>
+              <far>300</far>
+            </clip>
+          </camera>
+          <always_on>1</always_on>
+          <update_rate>30</update_rate>
+          <visualize>1</visualize>
+          <plugin name="camera_link" filename="libgazebo_ros_camera.so">
+            <alwaysOn>true</alwaysOn>
+            <updateRate>0.0</updateRate>
+            <cameraName>camera1</cameraName>
+            <imageTopicName>image_raw</imageTopicName>
+            <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+            <frameName>camera_link</frameName>
+            <hackBaseline>0.07</hackBaseline>
+            <distortionK1>0.0</distortionK1>
+            <distortionK2>0.0</distortionK2>
+            <distortionK3>0.0</distortionK3>
+            <distortionT1>0.0</distortionT1>
+            <distortionT2>0.0</distortionT2>
+          </plugin>
+        </sensor>
+      </link>
+
       <joint name='left_wheel_joint' type='revolute'>
         <parent>chassis</parent>
         <child>left_wheel</child>
@@ -217,6 +275,11 @@
       <joint name='caster_wheel' type='ball'>
         <parent>chassis</parent>
         <child>caster</child>
+      </joint>
+
+      <joint name='camera_joint' type='fixed'>
+        <child>camera_link</child>
+        <parent>chassis</parent>
       </joint>
 
       <plugin name='diff_drive' filename='libgazebo_ros_diff_drive.so'>

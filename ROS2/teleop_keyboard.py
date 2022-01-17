@@ -51,8 +51,8 @@ space = " "
 
 moveBindings = {
     up: (1, 0, 0, 0),
-    right: (1, 0, 0, -1),
-    left: (1, 0, 0, 1),
+    right: (0, 0, 0, -1),
+    left: (0, 0, 0, 1),
     down: (-1, 0, 0, 0),
     space: (0, 0, 0, 0)
 }
