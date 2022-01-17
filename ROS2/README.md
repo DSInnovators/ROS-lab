@@ -1,13 +1,13 @@
 # ROS2 and Gazebo
 
-### Environment setup for Ubuntu 20.04
+#### Environment setup for Ubuntu 20.04
 
 0. Download *install_ros2.sh* in your computer.
 1. Open a terminal and run <tt>sudo chmod +x install_ros2.sh</tt>.
 2. Execute the bash file by running <tt>sudo ./install_ros2.sh</tt>.
 3. Source the bashrc file <tt>source ~/.bashrc</tt>.
 
-### Check Environment Variables
+#### Check Environment Variables
 
 ```
 $ printenv | grep -i ROS
@@ -23,7 +23,7 @@ ROS_DISTRO=foxy
 
 ## Keyboard Controlled Differential Drive Robot with ROS2 and Gazebo
 
-### Install gazebo_ros_pkgs
+#### Install gazebo_ros_pkgs
 Gazebo is installed alongside ROS2. In order to install [gazebo_ros_pkgs](http://gazebosim.org/tutorials?tut=ros2_installing&cat=connect_ros), run the following command: 
 ```
 $ sudo apt install ros-foxy-gazebo-ros-pkgs
@@ -38,7 +38,7 @@ $ gazebo --verbose /opt/ros/foxy/share/gazebo_plugins/worlds/gazebo_ros_diff_dri
 ```
 You also need to have **python3** installed in your system.
 
-### Build custom plugin for differential drive robot
+#### Build custom plugin for differential drive robot
 
 We will build a custom plugin and refer to that **.so** object in our world file. The world file is located in this repo under [*ROS2/world/gazebo_ros_diff_drive_demo.world*](https://github.com/DSInnovators/ROS-lab/blob/main/ROS2/world/gazebo_ros_diff_drive_demo.world). 
 
@@ -135,8 +135,14 @@ angular:
   z: 0.0
 ---
 ```
+## Camera Sensor with Diff Drive Robot
 
+1. Open a new terminal, and type `rviz2`
+2. In the *Fixed Frame* option, type `camera_link`
+3. Add a *Camera* from options under **rviz_default_plugins**
+4. In the *Topic* field, put `/camera1/image_raw`
 
+You will see a small screen containing the real time feed of the simulation. Play around by putting some objects in the gazebo simulation window.
 
 
 
