@@ -46,15 +46,22 @@ To install this plugin project, git clone the repo
     $ cd ROS-lab/ROS1/catkin_ws
     $ catkin_make
     $ source devel/setup.sh 
+    $ roscore
+
+Another terminal
+
     $ gzserver -u src/gazebo_vechile_contorl/worlds/vehicle_control.world       
 
 In separate terminal, start the gui
 
     $ gzclient
    
+In separate terminal, start the keyboard controller
+
+    $ rosrun teleop_twist_keyboard teleop_twist_keyboard.py cmd_vel:=vehicle/cmd_vel
 
 #### Output
-Click on the play button in the gui to unpause the simulation, and you should see the box move.
+Click on the play button in the gui to unpause the simulation, and you should see vehicle. You can move control the vehicle with keyboard now.
     
 
    
