@@ -1,5 +1,5 @@
-cmake_minimum_required(VERSION 2.8.3 FATAL_ERROR)
-project(gazebo_model_push)
+cmake_minimum_required(VERSION 3.0.2)
+project(gazebo_vechile_contorl)
 
 list(APPEND CMAKE_CXX_FLAGS "${GAZEBO_CXX_FLAGS}")
 
@@ -8,6 +8,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp  
   gazebo_msgs 
   geometry_msgs   
+  gazebo_ros 
 )
 
 # Depend on system install of Gazebo
@@ -21,11 +22,8 @@ catkin_package(
     roscpp    
     geometry_msgs
     gazebo_msgs
+    gazebo_ros 
 )
 
-add_library(${PROJECT_NAME} SHARED src/model_push.cc)
-target_link_libraries(${PROJECT_NAME} ${GAZEBO_LIBRARIES})
-
-
-
-
+#add_library(${PROJECT_NAME} SHARED src/model_push.cc)
+#target_link_libraries(${PROJECT_NAME} ${GAZEBO_LIBRARIES})

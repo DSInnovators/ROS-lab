@@ -1,9 +1,8 @@
-## Simple Gazebo Model Plugin 
+## Keyboard Controlled Simple Gazebo Vehicle 
 
 #### Introduction
 
-This is a Model type plugin which is attached to a model in Gazebo.
-Plugins allow complete access to the physical properties of models and their underlying elements (links, joints, collision objects). The following plugin will apply a linear velocity to its parent model.
+This is a Differential Drive Robot in Gazebo.
 
 
 #### Environment Setup
@@ -47,15 +46,35 @@ To install this plugin project, git clone the repo
     $ cd ROS-lab/ROS1/catkin_ws
     $ catkin_make
     $ source devel/setup.sh 
-    $ gzserver -u src/gazebo_model_push/worlds/model_push.world --verbose       
+    $ rosrun gazebo_ros gzserver src/gazebo_vechile_contorl/worlds/vehicle_control.world
 
 In separate terminal, start the gui
 
     $ gzclient
-   
+
+You will see like this.
+
+![img_1.png](img_1.png)
+
+Insert a box from toolbar.
+
+![img_2.png](img_2.png)
+
+
+In seperate terminal, start ROS visualization **rviz**
+    
+    $ rviz rviz -f camera_link
+
+To view image on camera, add Camera By topic in the following way.
+
+   ![img.png](img.png)
+
+In separate terminal, start the keyboard controller
+
+    $ rosrun teleop_twist_keyboard teleop_twist_keyboard.py cmd_vel:=vehicle/cmd_vel
 
 #### Output
-Click on the play button in the gui to unpause the simulation, and you should see the box move.
+Click on the play button in the gui to unpause the simulation, and you should see vehicle. You can move control the vehicle with keyboard now and in gazebo desktop you will see your vehicle is moving and in rviz you will see the camera view.
     
 
    
