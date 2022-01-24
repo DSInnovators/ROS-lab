@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(gazebo_vechile_contorl)
+project(gazebo_vehicle_contorl)
 
 list(APPEND CMAKE_CXX_FLAGS "${GAZEBO_CXX_FLAGS}")
 
