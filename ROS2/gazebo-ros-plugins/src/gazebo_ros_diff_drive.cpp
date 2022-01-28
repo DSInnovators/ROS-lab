@@ -49,7 +49,6 @@
  * \author   Markus Bader <markus.bader@tuwien.ac.at>
  * \date 22th of May 2014
  */
-
 #include <gazebo/common/Time.hh>
 #include <gazebo/physics/Joint.hh>
 #include <gazebo/physics/Link.hh>
@@ -63,6 +62,10 @@
 #include <geometry_msgs/msg/twist.hpp>
 #include <nav_msgs/msg/odometry.hpp>
 #include <sdf/sdf.hh>
+
+#include "rclcpp/rclcpp.hpp"
+#include "rcutils/error_handling.h"
+#include "std_msgs/msg/string.hpp"
 
 #ifdef NO_ERROR
 // NO_ERROR is a macro defined in Windows that's used as an enum in tf2
@@ -239,6 +242,8 @@ void GazeboRosDiffDrive::Load(gazebo::physics::ModelPtr _model, sdf::ElementPtr 
 
   // Initialize ROS node
   impl_->ros_node_ = gazebo_ros::Node::Get(_sdf);
+
+  RCLCPP_INFO(impl_->ros_node_->get_logger(), "test log hello world!!");
 
   // Get QoS profiles
   const gazebo_ros::QoS & qos = impl_->ros_node_->get_qos();
