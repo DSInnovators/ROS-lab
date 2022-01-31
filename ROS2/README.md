@@ -152,5 +152,4 @@ We are using `frcnn-mobilenet` pre-trained network from `Pytorch`, using the `co
 
 Screenshot of the project where the robot detects a sphere as a sports ball.
 
-[!Screenshot](/resources/images/screenshot_detecting_object_sphere.png?raw=true "Robot detecting a sphere as a sports ball")
-
+![Screenshot](https://github.com/DSInnovators/ROS-lab/blob/dca2cf885afc3e97cfe4b358a08fc9ec8ea3cd6d/ROS2/resources/images/screenshot_detecting_object_sphere.png?raw=true "Robot detecting a sphere as a sports ball")
