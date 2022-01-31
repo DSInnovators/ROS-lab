@@ -98,7 +98,14 @@ Makefile*
 *.qm
 *.prl
 
+# build
 ROS2/**/build/
+
+# ide
+**/.idea
+
+# venv
+**/venv
 
 # ROS1 build and devel folders
 ROS1/catkin_ws/build/
