@@ -144,6 +144,13 @@ angular:
 
 You will see a small screen containing the real time feed of the simulation. Play around by putting some objects in the gazebo simulation window.
 
+### Object Detection with Machine Learning
 
+We are using `frcnn-mobilenet` pre-trained network from `Pytorch`, using the `coco` dataset. Our ML implementation requires a few libraries and all of them are listed on the `requirements.txt`. In order to detect objects in our system (and in our world), pull the code, and install all necessary libraries (or if you're using PyCharm, create a venv with the requirements). Lastly, run `python object-detection.py` from the `subscribers` fokder.
 
+[Here](https://www.loom.com/share/a476c8e4287c4d34b07e0dd0903536d5) is a demo video of our implementation.
+
+Screenshot of the project where the robot detects a sphere as a sports ball.
+
+[!Screenshot](/resources/images/screenshot_detecting_object_sphere.png?raw=true "Robot detecting a sphere as a sports ball")
 
