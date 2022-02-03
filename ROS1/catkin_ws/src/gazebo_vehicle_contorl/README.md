@@ -46,7 +46,11 @@ To install this plugin project, git clone the repo
     $ cd ROS-lab/ROS1/catkin_ws
     $ catkin_make
     $ source devel/setup.sh 
-    $ rosrun gazebo_ros gzserver src/gazebo_vechile_contorl/worlds/vehicle_control.world
+    $ roscore
+
+In seperate terminal, start gzserver
+
+    $ rosrun gazebo_ros gzserver src/gazebo_vehicle_contorl/worlds/vehicle_control.world --verbose
 
 In separate terminal, start the gui
 
