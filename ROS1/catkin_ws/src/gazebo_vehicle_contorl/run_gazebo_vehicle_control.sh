@@ -3,7 +3,7 @@ echo "running model_push"
 roscore &
 sleep 10
 
-rosrun gazebo_ros gzserver  /home/mazharul/code/ROS-lab/ROS1/catkin_ws/src/gazebo_vehicle_contorl/worlds/vehicle_control.world --verbose &
+rosrun gazebo_ros gzserver  src/gazebo_vehicle_contorl/worlds/vehicle_control.world --verbose &
 sleep 10
 
 gzclient &
