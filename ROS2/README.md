@@ -34,6 +34,10 @@ Run the first script which will prompt the *gazebo simulation* and *keyboard con
 ```
 ./run_script.sh
 ```
+If you don't have `virtualenv` installed for `python3`, install it using the following command:
+```
+pip3 install virtualenv 
+```
 Once the terminals are running, run the second script which will create a virtual environment and install all necessary requirements.
 ```
 ./venv_script.sh
