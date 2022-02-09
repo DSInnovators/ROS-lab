@@ -107,6 +107,9 @@ ROS2/**/build/
 # venv
 **/venv
 
+# custom venv
+**/object_detection_venv
+
 # ROS1 build and devel folders
 ROS1/catkin_ws/build/
 ROS1/catkin_ws/devel/
