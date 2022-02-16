@@ -23,7 +23,7 @@ ROS_DISTRO=foxy
 
 #### Run the project
 
-##### Please make sure you have [gazebo_ros_pkgs](http://gazebosim.org/tutorials?tut=ros2_installing&cat=connect_ros) installed. Follow the instructions in the next session if you don't.
+##### Please make sure you have [gazebo_ros_pkgs](http://gazebosim.org/tutorials?tut=ros2_installing&cat=connect_ros) installed. Follow the instructions in the next section if you don't.
 
 Clone the project in your machine, and run the simulation first. You have to provide execute permission for both the `.sh` files. Navigate to `ROS2` folder and follow the below instructions:
 ```
