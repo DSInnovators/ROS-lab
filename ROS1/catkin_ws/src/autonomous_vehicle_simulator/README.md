@@ -36,7 +36,10 @@ Now check
 First, if you installed Gazebo from debians, make sure you've installed the Gazebo development files. If you installed Gazebo from source, you can ignore this step. If you have a release other than gazebo11, replace 11 with whatever version number you have.
 
     $ sudo apt-get install libgazebo11-dev
-    
+    $ sudo apt-get install libopencv-dev python3-opencv
+    $ sudo apt-get install ros-noetic-cv-bridge
+    $ sudo apt-get install python3-numpy
+    $ sudo apt-get install python3-matplotlib
 
 
 #### Installing and running the project
