@@ -77,6 +77,10 @@ In separate terminal, start the keyboard controller
 
     $ rosrun teleop_twist_keyboard teleop_twist_keyboard.py cmd_vel:=vehicle/cmd_vel
 
+Or you can run the **run_gazebo_vehicle_control.sh** script from **catkin_ws** directory
+    
+    $ sh src/gazebo_vehicle_contorl/run_gazebo_vehicle_control.sh
+
 #### Output
 Click on the play button in the gui to unpause the simulation, and you should see vehicle. You can move control the vehicle with keyboard now and in gazebo desktop you will see your vehicle is moving and in rviz you will see the camera view.
     
