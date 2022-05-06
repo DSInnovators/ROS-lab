@@ -14,7 +14,7 @@
 const std::string COMMAND = "vehicle/cmd_vel";
 
 // Map for movement keys
-std::map<char, std::vector<float>>  moveBindings{
+const std::map<char, std::array<int,4>>  moveBindings{
         {'i', {1, 0, 0, 0}},
         {'o', {1, 0, 0, -1}},
         {'j', {0, 0, 0, 1}},
@@ -37,7 +37,7 @@ std::map<char, std::vector<float>>  moveBindings{
         {'K', {0, 0, 0, 0}}};
 
 // Map for speed keys
-std::map<char, std::vector<float>> speedBindings{
+const std::map<char, std::array<float,2>> speedBindings{
     {'q', {1.1, 1.1}},
     {'z', {0.9, 0.9}},
     {'w', {1.1, 1}},
@@ -75,10 +75,8 @@ private:
     float turn;             // Angular velocity (rad/s)
     float x, y, z, th; // Forward/backward/neutral direction vars
     char key;
-    std::string direction;
-    // static ros::Publisher pub;    
+    std::string direction;    
    
-
 public:
     CommandPublisher()
     {
@@ -92,51 +90,44 @@ public:
         key = ' ';        
     }
 
-    // static void setPublisher(ros::Publisher publisher);
-    // static ros::Publisher getPublisher();
-
-    void setSpeed(float speed)
+    void setSpeed(const float speed)
     {
         this->speed = speed;
     }
+    void setTurn(const float turn)
+    {
+        this->turn = turn;
+    }
 
-    std::string getDirection()
+    const std::string& getDirection() const
     {
         return direction;
     }
 
-    void publishCommand(char key_code, ros::Publisher pub) 
+    void publishCommand(const char key_code, const ros::Publisher &pub) 
     {        
         // Create Twist message
         geometry_msgs::Twist twist;
-
-        // printf("%s", msg);
-        printf("\nCurrent: speed %f\tturn %f | Awaiting command...", speed, turn);
-        printf("\nCurrent: key %c \n", key_code);
-    
-        // Get the pressed key
-        key = key_code; // getch();
+       
+        // Get the key
+        key = key_code;
 
         // If the key corresponds to a key in moveBindings
         if (moveBindings.count(key) == 1)
         {
-            // Grab the direction data
-            x = moveBindings[key][0];
-            y = moveBindings[key][1];
-            z = moveBindings[key][2];
-            th = moveBindings[key][3];
-
-            //printf("\nmovebindings Current: speed %f\tturn %f | Last command: %c\n", speed, turn, key);
+            // Grab the direction data            
+            x = (moveBindings.at(key)).at(0); 
+            y = (moveBindings.at(key)).at(1); 
+            z = (moveBindings.at(key)).at(2);
+            th = (moveBindings.at(key)).at(3);
         }
 
         // Otherwise if it corresponds to a key in speedBindings
         else if (speedBindings.count(key) == 1)
         {
             // Grab the speed data
-            speed = speed * speedBindings[key][0];
-            turn = turn * speedBindings[key][1];
-
-            //printf("\nspeed bindings Current: speed %f\tturn %f | Last command: %c\n", speed, turn, key);
+            speed *= (speedBindings.at(key)).at(0); 
+            turn *= (speedBindings.at(key)).at(1); 
         }
 
         // Otherwise, set the robot to stop
@@ -153,8 +144,6 @@ public:
                 printf("\n\n                 .     .\n              .  |\\-^-/|  .    \n             /| } O.=.O { |\\\n\n                 CH3EERS\n\n");
                 return;
             }
-
-            //printf("\nCurrent: speed %f\tturn %f | Invalid command! %c\n", speed, turn, key);
         }
 
         // Update the Twist message
@@ -167,11 +156,8 @@ public:
         twist.angular.z = th * turn;
 
         // Publish it and resolve any remaining callbacks        
-        printf("\nPublishing Current: speed %f\tturn %f | Last command: %c\n", speed, turn, key);
-        pub.publish(twist);
-        ros::spinOnce();
-        
-        //return;
+        ROS_INFO("Publishing command:  Current speed %.2f | turn %.2f | Command: %c\n", speed, turn, key);      
+        pub.publish(twist);   
     }    
 };
 

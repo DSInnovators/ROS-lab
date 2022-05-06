@@ -17,6 +17,7 @@ std::shared_ptr<CommandPublisher> pcmdPublisher;
 void moveVehicle(const std::string direction, std::shared_ptr<CommandPublisher> pcmdPublisher)
 {   
     pcmdPublisher->setSpeed(0.15);
+    pcmdPublisher->setTurn(0.15);
     char key_code = 'i';
     if (direction == MOVE_LEFT)
         key_code = 'u';        
@@ -29,6 +30,7 @@ void moveVehicle(const std::string direction, std::shared_ptr<CommandPublisher> 
     if (direction == MOVE_FORWARD)
     {
         pcmdPublisher->setSpeed(0.3);
+        pcmdPublisher->setTurn(0.0);
         key_code = 'i';
     }        
     if (direction == MOVE_STOP)
@@ -77,7 +79,6 @@ void imageCallback(const sensor_msgs::ImageConstPtr &msg)
             moveVehicle(direction, pcmdPublisher);
 
             i += 1;
-            // cv::waitKey(25);
         }
         else
         {
@@ -93,11 +94,11 @@ void imageCallback(const sensor_msgs::ImageConstPtr &msg)
 
 int main(int argc, char **argv)
 {
-    ROS_INFO("built FROM C++ [%s]", AUTOMATE_VEHICLE.c_str());
+    ROS_INFO("Built FROM C++ [%s]\n", AUTOMATE_VEHICLE.c_str());
     ros::init(argc, argv, AUTOMATE_VEHICLE);
    
     ros::NodeHandle nodeHandle;
-    cv::namedWindow("view");
+    
     pcmdPublisher = std::shared_ptr<CommandPublisher>(new CommandPublisher());
 
     pub = nodeHandle.advertise<geometry_msgs::Twist>(COMMAND, 10);
@@ -107,12 +108,6 @@ int main(int argc, char **argv)
     
     ros::spin();
 
-    cv::destroyWindow("view");
-
-    return 0;
-    
-
-    
-    
+    return 0;  
     
 }

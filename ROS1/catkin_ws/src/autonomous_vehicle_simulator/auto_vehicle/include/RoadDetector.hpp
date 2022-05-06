@@ -33,15 +33,12 @@ private:
     double left_m;           //
 
 public:
-    cv::Mat deNoise(cv::Mat inputImage);                                                                         // Apply Gaussian blurring to the input Image
-    cv::Mat edgeDetector(cv::Mat img_noise);                                                                     // Filter the image to obtain only edges
-    cv::Mat mask(cv::Mat img_edges);                                                                             // Mask the edges image to only care about ROI
-    std::vector<cv::Vec4i> houghLines(cv::Mat img_mask);                                                         // Detect Hough lines in masked edges image
-    std::vector<std::vector<cv::Vec4i>> lineSeparation(std::vector<cv::Vec4i> lines, cv::Mat img_edges);         // Sprt detected lines by their slope into right and left lines
-    std::vector<cv::Point> regression(std::vector<std::vector<cv::Vec4i>> left_right_lines, cv::Mat inputImage); // Get only one line for each side of the lane
-    std::string getDirectionFromLines(std::vector<std::vector<cv::Vec4i>> left_right_lines, cv::Mat inputImage);
-    std::string predictTurn();                                                                               // Determine if the lane is turning or not by calculating the position of the vanishing point
-    int plotLane(cv::Mat inputImage, std::vector<cv::Point> lane, std::string turn);                             // Plot the resultant lane and turn prediction in the frame.
+    cv::Mat deNoise(const cv::Mat& inputImage) const;                                                                   // Apply Gaussian blurring to the input Image
+    cv::Mat edgeDetector(const cv::Mat& img_noise) const;                                                                     // Filter the image to obtain only edges
+    cv::Mat mask(const cv::Mat& img_edges) const;                                                                             // Mask the edges image to only care about ROI
+    const std::vector<cv::Vec4i> houghLines(const cv::Mat& img_mask);                                                  // Detect Hough lines in masked edges image
+    const std::vector<std::vector<cv::Vec4i>> lineSeparation(const std::vector<cv::Vec4i>& lines, const cv::Mat& img_edges);         // Sprt detected lines by their slope into right and left lines    
+    const std::string& getDirectionFromLines(const std::vector<std::vector<cv::Vec4i>>& left_right_lines, const cv::Mat& inputImage);    
 };
 
 #endif //ROAD_DETECTOR_HPP_
