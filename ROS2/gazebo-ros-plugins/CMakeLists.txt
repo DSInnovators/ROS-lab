@@ -47,7 +47,7 @@ endif()
 
 # gazebo_ros_diff_drive
 add_library(gazebo_ros_diff_drive SHARED
-  src/gazebo_ros_diff_drive.cpp
+  src/gazebo_ros_diff_drive_2.cpp
 )
 target_include_directories(gazebo_ros_diff_drive PUBLIC include)
 ament_target_dependencies(gazebo_ros_diff_drive

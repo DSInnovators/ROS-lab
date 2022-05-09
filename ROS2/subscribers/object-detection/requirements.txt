@@ -2,3 +2,5 @@ torch
 torchvision
 opencv-contrib-python
 imutils
+numpy
+matplotlib
