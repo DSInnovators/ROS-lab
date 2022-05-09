@@ -1,7 +1,7 @@
 
+#include "../include/RoadDetector.hpp"
 #include <string>
 #include <vector>
-#include "../include/RoadDetector.hpp"
 
 // IMAGE BLURRING
 /**
@@ -10,7 +10,7 @@
  *@param lane is going to be detected
  *@return Blurred and denoised image
  */
-cv::Mat RoadDetector::deNoise(const cv::Mat& inputImage) const
+cv::Mat RoadDetector::deNoise(const cv::Mat &inputImage) const
 {
     cv::Mat output;
 
@@ -25,7 +25,7 @@ cv::Mat RoadDetector::deNoise(const cv::Mat& inputImage) const
  *@param img_noise is the previously blurred frame
  *@return Binary image with only the edges represented in white
  */
-cv::Mat RoadDetector::edgeDetector(const cv::Mat& img_noise) const
+cv::Mat RoadDetector::edgeDetector(const cv::Mat &img_noise) const
 {
     cv::Mat output;
     cv::Mat kernel;
@@ -53,19 +53,20 @@ cv::Mat RoadDetector::edgeDetector(const cv::Mat& img_noise) const
 
 // MASK THE EDGE IMAGE
 /**
- *@brief Mask the image so that only the edges that form part of the lane are detected
+ *@brief Mask the image so that only the edges that form part of the lane are
+ *detected
  *@param img_edges is the edges image from the previous function
  *@return Binary image with only the desired edges being represented
  */
-cv::Mat RoadDetector::mask(const cv::Mat& img_edges) const
+cv::Mat RoadDetector::mask(const cv::Mat &img_edges) const
 {
     cv::Mat output;
-    // printf("output image  width %d, height %d\n", img_edges.cols, img_edges.rows);
+    // printf("output image  width %d, height %d\n", img_edges.cols,
+    // img_edges.rows);
     cv::Mat mask = cv::Mat::zeros(img_edges.size(), img_edges.type());
-    cv::Point pts[3] = {        
-        cv::Point(0, img_edges.rows),
-        cv::Point((img_edges.cols/2), (img_edges.rows/2)),        
-        cv::Point(img_edges.cols, img_edges.rows)};
+    cv::Point pts[3] = {cv::Point(0, img_edges.rows),
+                        cv::Point((img_edges.cols / 2), (img_edges.rows / 2)),
+                        cv::Point(img_edges.cols, img_edges.rows)};
 
     // Create a binary polygon mask
     cv::fillConvexPoly(mask, pts, 3, cv::Scalar(255, 0, 0));
@@ -77,11 +78,12 @@ cv::Mat RoadDetector::mask(const cv::Mat& img_edges) const
 
 // HOUGH LINES
 /**
- *@brief Obtain all the line segments in the masked images which are going to be part of the lane boundaries
+ *@brief Obtain all the line segments in the masked images which are going to be
+ *part of the lane boundaries
  *@param img_mask is the masked binary image from the previous function
  *@return Vector that contains all the detected lines in the image
  */
-const std::vector<cv::Vec4i> RoadDetector::houghLines(const cv::Mat& img_mask)
+const std::vector<cv::Vec4i> RoadDetector::houghLines(const cv::Mat &img_mask)
 {
     std::vector<cv::Vec4i> line;
 
@@ -100,7 +102,9 @@ const std::vector<cv::Vec4i> RoadDetector::houghLines(const cv::Mat& img_mask)
  *@param img_edges is used for determining the image center
  *@return The output is a vector(2) that contains all the classified lines
  */
-const std::vector<std::vector<cv::Vec4i>> RoadDetector::lineSeparation(const std::vector<cv::Vec4i>& lines, const cv::Mat& img_edges)
+const std::vector<std::vector<cv::Vec4i>>
+RoadDetector::lineSeparation(const std::vector<cv::Vec4i> &lines,
+                             const cv::Mat &img_edges)
 {
     std::vector<std::vector<cv::Vec4i>> output(2);
     size_t j = 0;
@@ -118,7 +122,9 @@ const std::vector<std::vector<cv::Vec4i>> RoadDetector::lineSeparation(const std
         fini = cv::Point(i[2], i[3]);
 
         // Basic algebra: slope = (y1 - y0)/(x1 - x0)
-        double slope = (static_cast<double>(fini.y) - static_cast<double>(ini.y)) / (static_cast<double>(fini.x) - static_cast<double>(ini.x) + 0.00001);
+        double slope =
+            (static_cast<double>(fini.y) - static_cast<double>(ini.y)) /
+            (static_cast<double>(fini.x) - static_cast<double>(ini.x) + 0.00001);
 
         // If the slope is too horizontal, discard the line
         // If not, save them  and their respective slope
@@ -156,7 +162,9 @@ const std::vector<std::vector<cv::Vec4i>> RoadDetector::lineSeparation(const std
     return output;
 }
 
-const std::string& RoadDetector::getDirectionFromLines(const std::vector<std::vector<cv::Vec4i>>& left_right_lines, const cv::Mat& inputImage)
+const std::string &RoadDetector::getDirectionFromLines(
+    const std::vector<std::vector<cv::Vec4i>> &left_right_lines,
+    const cv::Mat &inputImage)
 {
     std::vector<cv::Point> output(4);
     cv::Point ini;
@@ -168,7 +176,8 @@ const std::string& RoadDetector::getDirectionFromLines(const std::vector<std::ve
     std::vector<cv::Point> right_pts;
     std::vector<cv::Point> left_pts;
 
-    // If right lines are being detected, fit a line using all the init and final points of the lines
+    // If right lines are being detected, fit a line using all the init and final
+    // points of the lines
     if (right_flag == true)
     {
         for (auto i : left_right_lines[0])
@@ -193,7 +202,8 @@ const std::string& RoadDetector::getDirectionFromLines(const std::vector<std::ve
         return MOVE_RIGHT;
     }
 
-    // If left lines are being detected, fit a line using all the init and final points of the lines
+    // If left lines are being detected, fit a line using all the init and final
+    // points of the lines
     if (left_flag == true)
     {
         for (auto j : left_right_lines[1])
@@ -218,9 +228,8 @@ const std::string& RoadDetector::getDirectionFromLines(const std::vector<std::ve
         return MOVE_LEFT;
     }
 
-    
-
-    // One the slope and offset points have been obtained, apply the line equation to obtain the line points
+    // One the slope and offset points have been obtained, apply the line equation
+    // to obtain the line points
     int ini_y = inputImage.rows;
     int fin_y = 470;
 
@@ -230,5 +239,5 @@ const std::string& RoadDetector::getDirectionFromLines(const std::vector<std::ve
     double left_ini_x = ((ini_y - left_b.y) / left_m) + left_b.x;
     double left_fin_x = ((fin_y - left_b.y) / left_m) + left_b.x;
 
-    return MOVE_FORWARD;    
+    return MOVE_FORWARD;
 }
