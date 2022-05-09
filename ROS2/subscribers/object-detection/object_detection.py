@@ -13,6 +13,10 @@ import torch
 from util import load_classes
 import imutils
 import datetime
+import os
+
+curr_dir = os.path.dirname(os.path.realpath(__file__))  # get's the path of the script
+os.chdir(curr_dir)
 
 modelMain = "frcnn-mobilenet"
 labelsMain = "coco.names"
@@ -36,7 +40,8 @@ model.eval()
 
 class image_converter(Node):
     def __init__(self):
-        super().__init__('minimal_subscriber')
+        super().__init__('object_detection')
+
         self.bridge = CvBridge()
         self.subscription = self.create_subscription(
             Image,

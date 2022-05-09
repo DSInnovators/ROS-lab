@@ -21,6 +21,28 @@ ROS_PYTHON_VERSION=3
 ROS_DISTRO=foxy
 ```
 
+#### Run the project
+
+##### Please make sure you have [gazebo_ros_pkgs](http://gazebosim.org/tutorials?tut=ros2_installing&cat=connect_ros) installed. Follow the instructions in the next section if you don't.
+
+Clone the project in your machine, and run the simulation first. You have to provide execute permission for both the `.sh` files. Navigate to `ROS2` folder and follow the below instructions:
+```
+chmod +x run_script.sh
+chmod +x venv_script.sh
+```
+Run the first script which will prompt the *gazebo simulation* and *keyboard control* in separate terminals.
+```
+./run_script.sh
+```
+If you don't have `virtualenv` installed for `python3`, install it using the following command:
+```
+pip3 install virtualenv 
+```
+Once the terminals are running, run the second script which will create a virtual environment and install all necessary requirements.
+```
+./venv_script.sh
+```
+
 ## Keyboard Controlled Differential Drive Robot with ROS2 and Gazebo
 
 #### Install gazebo_ros_pkgs
