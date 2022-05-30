@@ -33,8 +33,8 @@ include_directories(
 )
 
 add_executable(automate_vehicle 
-  src/automate_vehicle.cpp
-  src/RoadDetector.cpp)
+  src/automate_vehicle.cc
+  src/RoadDetector.cc)
 target_link_libraries(automate_vehicle ${catkin_LIBRARIES})
 add_dependencies(automate_vehicle auto_vehicle_generate_messages_cpp)
 

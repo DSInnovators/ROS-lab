@@ -1,7 +1,5 @@
 
-#include "../include/RoadDetector.hpp"
-#include <string>
-#include <vector>
+#include "../include/RoadDetector.h"
 
 // IMAGE BLURRING
 /**

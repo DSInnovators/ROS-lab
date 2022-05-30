@@ -1,13 +1,14 @@
-#ifndef COMMAND_PUBLISHER_HPP_
-#define COMMAND_PUBLISHER_HPP_
+#ifndef AV_VEHICLE_CONTROL_H_
+#define AV_VEHICLE_CONTROL_H_
 
-#include <geometry_msgs/Twist.h>
-#include <ros/ros.h>
-
-#include <map>
 #include <stdio.h>
 #include <termios.h>
 #include <unistd.h>
+
+#include <map>
+
+#include <geometry_msgs/Twist.h>
+#include <ros/ros.h>
 
 const std::string COMMAND = "vehicle/cmd_vel";
 
@@ -131,4 +132,4 @@ public:
     }
 };
 
-#endif // COMMAND_PUBLISHER_HPP
+#endif // AV_VEHICLE_CONTROL_H_

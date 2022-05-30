@@ -1,11 +1,11 @@
+#include <memory>
 
-#include "../include/RoadDetector.hpp"
-#include "../include/vehicle_control.hpp"
 #include <cv_bridge/cv_bridge.h>
 #include <image_transport/image_transport.h>
-#include <memory>
-#include <opencv2/highgui/highgui.hpp>
 #include <ros/ros.h>
+
+#include "../include/RoadDetector.h"
+#include "../include/vehicle_control.h"
 
 const std::string AUTOMATE_VEHICLE = "automate_vehicle";
 const std::string IMAGE_TOPIC = "/vehicle_camera/image_raw";
@@ -46,10 +46,11 @@ void imageCallback(const sensor_msgs::ImageConstPtr &msg)
     cv::Mat imgDeNoise, imgEdges, imgMask, imgLines;
     std::vector<cv::Vec4i> lines;
     std::vector<std::vector<cv::Vec4i>> left_right_lines;
-    std::vector<cv::Point> lane;
+    // std::vector<cv::Point> lane;
     std::string direction;
-    int flag_plot = -1;
-    int i = 0;
+    // int flag_plot = -1;
+    // int i = 0;
+    
 
     RoadDetector roadDetector;
     try
@@ -72,18 +73,19 @@ void imageCallback(const sensor_msgs::ImageConstPtr &msg)
             left_right_lines = roadDetector.lineSeparation(lines, imgEdges);
 
             // Predict the turn by determining the vanishing point of the the lines
-            direction =
-                roadDetector.getDirectionFromLines(left_right_lines, imgFrame);
+            direction = roadDetector.getDirectionFromLines(left_right_lines, imgFrame);
 
             // move the vehicle
             moveVehicle(direction, pcmdPublisher);
 
-            i += 1;
+            // i += 1;
+            // // cv::waitKey(25);
         }
-        else
-        {
-            flag_plot = -1;
-        }
+        // else
+        // {
+        //     flag_plot = -1;
+        // }
+
     }
     catch (cv_bridge::Exception &e)
     {
@@ -103,8 +105,7 @@ int main(int argc, char **argv)
     pub = nodeHandle.advertise<geometry_msgs::Twist>(COMMAND, 10);
 
     image_transport::ImageTransport it(nodeHandle);
-    image_transport::Subscriber sub =
-        it.subscribe(IMAGE_TOPIC, 100, imageCallback);
+    image_transport::Subscriber sub = it.subscribe(IMAGE_TOPIC, 100, imageCallback);
 
     ros::spin();
 
