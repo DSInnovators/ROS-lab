@@ -9,10 +9,12 @@ find_package(PythonLibs REQUIRED)
 add_message_files(DIRECTORY msg FILES Vehicle.msg)
 
 # # Generate added messages and services
-generate_messages(DEPENDENCIES std_msgs)
+generate_messages(DEPENDENCIES)
 
 # # Declare a catkin package
-catkin_package()
+catkin_package(
+  CATKIN_DEPENDS roscpp message_runtime
+)
 
 # # Build talker and listener
 include_directories(include
