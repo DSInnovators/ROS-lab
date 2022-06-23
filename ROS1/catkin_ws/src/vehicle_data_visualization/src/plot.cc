@@ -5,7 +5,7 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 
-#include "vehicle_data_visualization/Vehicle.h"
+#include <auto_vehicle_msgs/Status.h>
 #include <matplotlibcpp.h>
 
 namespace plt = matplotlibcpp;
@@ -25,7 +25,7 @@ std::vector<int> curtime2;
 
 int pos = 0;
 
-void plotDataCallback(const vehicle_data_visualization::Vehicle::ConstPtr &msg)
+void plotDataCallback(const auto_vehicle_msgs::Status::ConstPtr &msg)
 {
     slope.push_back(msg->slope);
     turn.push_back(msg->turn);

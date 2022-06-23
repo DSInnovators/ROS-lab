@@ -9,14 +9,16 @@
 
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>roscpp</build_depend>
-  <build_depend>rospy</build_depend>  
-  <build_depend>message_generation</build_depend>
-  
+  <build_depend>rospy</build_depend>
+  <build_depend>auto_vehicle_msgs</build_depend>  
+
   <build_export_depend>roscpp</build_export_depend>
   <build_export_depend>rospy</build_export_depend>
+  <build_export_depend>auto_vehicle_msgs</build_export_depend>
   
+
   <exec_depend>roscpp</exec_depend>
   <exec_depend>rospy</exec_depend>
-  <exec_depend>message_runtime</exec_depend>  
+  <exec_depend>auto_vehicle_msgs</exec_depend>  
   
 </package>

@@ -2,18 +2,20 @@ cmake_minimum_required(VERSION 3.0.2)
 project(vehicle_data_visualization LANGUAGES CXX)
 
 # # Find catkin and any catkin packages
-find_package(catkin REQUIRED COMPONENTS roscpp rospy message_generation)
+find_package(catkin REQUIRED COMPONENTS roscpp rospy auto_vehicle_msgs)
 find_package(PythonLibs REQUIRED)
 
-# # # Declare ROS messages and services
-add_message_files(DIRECTORY msg FILES Vehicle.msg)
+# # # # Declare ROS messages and services
+# add_message_files(DIRECTORY msg FILES Status.msg)
 
 # # Generate added messages and services
-generate_messages(DEPENDENCIES)
+# generate_messages(DEPENDENCIES )
 
 # # Declare a catkin package
 catkin_package(
-  CATKIN_DEPENDS roscpp message_runtime
+  INCLUDE_DIRS include
+  LIBRARIES ${PROJECT_NAME}
+  CATKIN_DEPENDS roscpp auto_vehicle_msgs
 )
 
 # # Build talker and listener

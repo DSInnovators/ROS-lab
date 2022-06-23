@@ -26,7 +26,7 @@ import traceback
 from vehicle_control import *
 
 # from plot_diagram.msg import Vehicle
-from vehicle_data_visualization.msg import Vehicle
+from auto_vehicle_msgs.msg import Status
 
 import sys, select, termios, tty
 
@@ -44,7 +44,7 @@ class RoadDetection:
         self.image = None
         self.detection_model = None
         self.slope_file = open("slope.txt", 'w')
-        self.publisher = rospy.Publisher(command_vehicle, Vehicle, queue_size=1000)
+        self.publisher = rospy.Publisher(command_vehicle, Status, queue_size=1000)
     #
     # def grey(self, image):
     #   #convert to grayscale
@@ -175,7 +175,7 @@ class RoadDetection:
         left = []
         right = []
 
-        vehicle_msg = Vehicle()
+        vehicle_msg = Status()
 
         speed = SPEED_1
         turn = TURN_1
