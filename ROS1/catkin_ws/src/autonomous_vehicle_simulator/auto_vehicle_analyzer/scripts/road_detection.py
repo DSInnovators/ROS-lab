@@ -19,22 +19,17 @@ import rospy
 # from cv_bridge import CvBridge, CvBridgeError
 # OpenCV2 for saving an image
 import cv2
-#from matplotlib import pyplot as plt
 import numpy as np
 import traceback
 
 from vehicle_control import *
-
-# from plot_diagram.msg import Vehicle
 from auto_vehicle_msgs.msg import Status
-
 import sys, select, termios, tty
 
 SLOPE_1 = 1.0
 SLOPE_2 = 1.2
 SLOPE_3 = 1.5
 SLOPE_4 = 1.8
-
 
 
 command_vehicle = 'vehicle_data'
@@ -63,27 +58,7 @@ class RoadDetection:
     def set_image(self, road_image):
         self.image = road_image
 
-    # @staticmethod
-    # def create_detection_model():
-    #     thres = 0.5  # Threshold to detect object
-    #     classNames = []
-    #     classFile = 'coco.names'
-    #     with open(classFile, 'rt') as f:
-    #         classNames = f.read().rstrip('\n').split('\n')
-
-    #     configPath = 'ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt'
-    #     weightsPath = 'frozen_inference_graph.pb'
-
-    #     detection_model = cv2.dnn_DetectionModel(weightsPath, configPath)
-    #     detection_model.setInputSize(320, 320)
-    #     detection_model.setInputScale(1.0/ 127.5)
-    #     detection_model.setInputMean((127.5, 127.5, 127.5))
-    #     detection_model.setInputSwapRB(True)
-
-    #     RoadDetection.detection_model = detection_model
-
-
-    def get_isolated_region(self, image):
+      def get_isolated_region(self, image):
         # global width
         # global height
         height, width = image.shape
