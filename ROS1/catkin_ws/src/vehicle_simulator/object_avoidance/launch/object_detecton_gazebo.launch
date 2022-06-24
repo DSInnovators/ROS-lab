@@ -1,0 +1,8 @@
+<launch>
+
+  <include file="$(find diff_drive_navigation)/launch/diff_drive_camera.launch"/>
+
+  <node pkg="object_avoidance" type="object_detection" name="object_detection" />
+
+
+</launch
