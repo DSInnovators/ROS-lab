@@ -2,9 +2,9 @@
 ```sh
 
 # Python
-$ roslaunch object_avoidance gazebo_vehicle_control.launch
+$ roslaunch gazebo_vehicle_control gazebo_vehicle_control.launch
 $ python3 object_avoiding.py
-$ python3 object_detecting.py
+$ python3 object_detection.py
 
 # CPP
 
