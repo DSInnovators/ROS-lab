@@ -1,9 +1,4 @@
-
 #include "../include/RoadDetector.h"
-#include <ros/ros.h>
-
-#include <auto_vehicle_msgs/Status.h>
-
 
 // IMAGE BLURRING
 /**
@@ -13,7 +8,6 @@
  *@return Blurred and denoised image
  */
 
-// auto_vehicle_msgs::Status vehicle_msg;
 cv::Mat RoadDetector::deNoise(const cv::Mat &inputImage) const
 {
     cv::Mat output;
@@ -110,11 +104,11 @@ const std::vector<std::vector<cv::Vec4i>>
 RoadDetector::lineSeparation(const std::vector<cv::Vec4i> &lines,
                              const cv::Mat &img_edges)
 {
-    // auto_vehicle_msgs::Status vehicle_msg;
     std::vector<std::vector<cv::Vec4i>> output(2);
     size_t j = 0;
     cv::Point ini;
     cv::Point fini;
+    double slope;
     double slope_thresh = 0.3;
     std::vector<double> slopes;
     std::vector<cv::Vec4i> selected_lines;
@@ -125,12 +119,10 @@ RoadDetector::lineSeparation(const std::vector<cv::Vec4i> &lines,
     {
         ini = cv::Point(i[0], i[1]);
         fini = cv::Point(i[2], i[3]);
-
         // Basic algebra: slope = (y1 - y0)/(x1 - x0)
-        double slope =
+        slope =
             (static_cast<double>(fini.y) - static_cast<double>(ini.y)) /
             (static_cast<double>(fini.x) - static_cast<double>(ini.x) + 0.00001);
-
         // If the slope is too horizontal, discard the line
         // If not, save them  and their respective slope
         if (std::abs(slope) > slope_thresh)
@@ -138,10 +130,6 @@ RoadDetector::lineSeparation(const std::vector<cv::Vec4i> &lines,
             slopes.push_back(slope);
             selected_lines.push_back(i);
         }
-        //std::cout<<"slope value " <<abs(slope)<<std::endl;
-        // vehicle_msg.slope = abs(slope);
-        // status_pub.publish(vehicle_msg);
-
     }
 
     // Split the lines into right and left lines
@@ -175,9 +163,7 @@ const std::string &RoadDetector::getDirectionFromLines(
     const std::vector<std::vector<cv::Vec4i>> &left_right_lines,
     const cv::Mat &inputImage)
 {
-    
-    
- 
+
     std::vector<cv::Point> output(4);
     cv::Point ini;
     cv::Point fini;
@@ -187,7 +173,6 @@ const std::string &RoadDetector::getDirectionFromLines(
     cv::Vec4d left_line;
     std::vector<cv::Point> right_pts;
     std::vector<cv::Point> left_pts;
-    
 
     // If right lines are being detected, fit a line using all the init and final
     // points of the lines

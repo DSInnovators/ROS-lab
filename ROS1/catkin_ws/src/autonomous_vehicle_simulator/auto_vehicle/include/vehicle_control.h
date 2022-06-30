@@ -12,7 +12,6 @@
 #include <map>
 #include <memory>
 
-
 #include <geometry_msgs/Twist.h>
 #include <ros/ros.h>
 
@@ -90,11 +89,11 @@ public:
             ini = cv::Point(i[0], i[1]);
             fini = cv::Point(i[2], i[3]);
 
+
             // Basic algebra: slope = (y1 - y0)/(x1 - x0)
             slope =
                 (static_cast<double>(fini.y) - static_cast<double>(ini.y)) /
-                (static_cast<double>(fini.x) - static_cast<double>(ini.x) + 0.00001);
-           
+                (static_cast<double>(fini.x) - static_cast<double>(ini.x));
         }
 
         // Create Twist message
@@ -163,7 +162,6 @@ public:
         ROS_INFO(
             "Publishing command:  Current speed %.2f | turn %.2f | Command: %c\n",
             speed, turn, key);
-        // self.publisher.publish(vehicle_msg)
     }
 };
 

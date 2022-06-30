@@ -64,8 +64,6 @@ void imageCallback(const sensor_msgs::ImageConstPtr &msg)
     RoadDetector roadDetector;
     try
     {
-        
-        // output_file2.write("{:.2f},{:.2f},{:.2f}\n".format(slope_abs, speed * 10, turn))
         // Denoise the image using a Gaussian filter
         imgDeNoise = roadDetector.deNoise(imgFrame);
 
@@ -79,13 +77,7 @@ void imageCallback(const sensor_msgs::ImageConstPtr &msg)
         lines = roadDetector.houghLines(imgMask);
         std::cout<<"lines one "<<lines[1] <<std::endl;
         std::cout<<"lines dissect "<<lines[1][0] <<std::endl;
-        // outfile << lines[1][0] << std::endl;
-        // std::cout<<"one data write"<<std::endl;
-
-
-       
-
-
+     
         if (false == lines.empty())
         {
             // Separate lines into left and right lines
