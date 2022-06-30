@@ -86,7 +86,7 @@ class CommandPublisher:
         elif key in speedBindings.keys():
             self.speed = speed * speedBindings[key][0]
             self.turn = turn * speedBindings[key][1]
-
+   
         twist = Twist()
         # Copy state into twist message.
         twist.linear.x = self.x * self.speed

@@ -5,6 +5,9 @@
 #include <vector>
 
 #include "opencv2/opencv.hpp"
+// #include <ros/ros.h>
+
+// #include <auto_vehicle_msgs/Status.h>
 
 const std::string MOVE_LEFT = "move_left";
 const std::string MOVE_RIGHT = "move_right";

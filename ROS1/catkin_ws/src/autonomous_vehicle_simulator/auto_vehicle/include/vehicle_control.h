@@ -4,8 +4,14 @@
 #include <stdio.h>
 #include <termios.h>
 #include <unistd.h>
+#include <auto_vehicle_msgs/Status.h>
 
+#include "opencv2/opencv.hpp"
+
+#include "RoadDetector.h"
 #include <map>
+#include <memory>
+
 
 #include <geometry_msgs/Twist.h>
 #include <ros/ros.h>
@@ -71,8 +77,26 @@ public:
 
     const std::string &getDirection() const { return direction; }
 
-    void publishCommand(const char key_code, const ros::Publisher &pub)
+    void publishCommand(const char key_code, const ros::Publisher &pub, const ros::Publisher &status_pub, std::vector<cv::Vec4i> lines)
     {
+        auto_vehicle_msgs::Status vehicle_msg;
+        double slope;
+
+        cv::Point ini;
+        cv::Point fini;
+
+        for (auto i : lines)
+        {
+            ini = cv::Point(i[0], i[1]);
+            fini = cv::Point(i[2], i[3]);
+
+            // Basic algebra: slope = (y1 - y0)/(x1 - x0)
+            slope =
+                (static_cast<double>(fini.y) - static_cast<double>(ini.y)) /
+                (static_cast<double>(fini.x) - static_cast<double>(ini.x) + 0.00001);
+           
+        }
+
         // Create Twist message
         geometry_msgs::Twist twist;
 
@@ -125,10 +149,21 @@ public:
         twist.angular.z = th * turn;
 
         // Publish it and resolve any remaining callbacks
+        // ROS_INFO(
+        //     "Publishing command:  Current speed %.2f | turn %.2f | Command: %c\n",
+        //     speed, turn, key);
+
+        pub.publish(twist);
+        double time = std::chrono::duration_cast<std::chrono::duration<double>>(std::chrono::system_clock::now().time_since_epoch()).count();
+        vehicle_msg.curtime = round(time);
+        vehicle_msg.slope = slope;
+        vehicle_msg.turn = turn;
+        vehicle_msg.speed = speed;
+        status_pub.publish(vehicle_msg);
         ROS_INFO(
             "Publishing command:  Current speed %.2f | turn %.2f | Command: %c\n",
             speed, turn, key);
-        pub.publish(twist);
+        // self.publisher.publish(vehicle_msg)
     }
 };
 

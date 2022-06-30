@@ -177,13 +177,9 @@ class RoadDetection:
                 x1, y1, x2, y2 = line.reshape(4)
                 # fit line to points, return slope and y-int
                 parameters = np.polyfit((x1, x2), (y1, y2), 1)
-                print("x1 value")
-                print(x1)
                 # print("parameters {}".format(parameters))
                 # print("road x1 {} x2 {}".format(x1,x2))
                 slope = parameters[0]
-                print("Slope?")
-                print(slope)
                 y_int = parameters[1]
                 print("road x1 {} x2 {} slope {:.3f} y_int {}".format(x1, x2, slope, y_int))
                 # lines on the right have positive slope, and lines on the left have neg slope
@@ -291,11 +287,10 @@ class RoadDetection:
             # CommandPublisher.set_speed(SPEED_3)
             # CommandPublisher.set_turn(TURN_3)
 
-            vehicle_msg.curtime = round(time.time())
+            vehicle_msg.curtime = round(time.time() * 1000)
             vehicle_msg.slope = slope_abs
-            vehicle_msg.turn = turn - 0.50
-            print(turn)
-            vehicle_msg.speed = speed - 0.20
+            vehicle_msg.turn = turn
+            vehicle_msg.speed = speed
             self.publisher.publish(vehicle_msg)
             rospy.loginfo(vehicle_msg)
             return  MOVE_LEFT
@@ -306,10 +301,10 @@ class RoadDetection:
             # CommandPublisher.set_speed(SPEED_3)
             # CommandPublisher.set_turn(TURN_3)
 
-            vehicle_msg.curtime = round(time.time())
+            vehicle_msg.curtime = round(time.time() * 1000)
             vehicle_msg.slope = slope_abs
-            vehicle_msg.turn = turn - 0.50
-            vehicle_msg.speed = speed - 0.20
+            vehicle_msg.turn = turn
+            vehicle_msg.speed = speed
             self.publisher.publish(vehicle_msg)
             rospy.loginfo(vehicle_msg)
 
@@ -321,10 +316,10 @@ class RoadDetection:
             # CommandPublisher.set_speed(SPEED_3)
             # CommandPublisher.set_turn(TURN_3)
 
-            vehicle_msg.curtime = round(time.time())
+            vehicle_msg.curtime = round(time.time() * 1000)
             vehicle_msg.slope = slope_abs
-            vehicle_msg.turn = turn - 0.50
-            vehicle_msg.speed = speed - 0.20
+            vehicle_msg.turn = turn
+            vehicle_msg.speed = speed
             self.publisher.publish(vehicle_msg)
             rospy.loginfo(vehicle_msg)
             return MOVE_RIGHT
@@ -335,10 +330,10 @@ class RoadDetection:
             # CommandPublisher.set_speed(SPEED_3)
             # CommandPublisher.set_turn(TURN_3)
 
-            vehicle_msg.curtime = round(time.time())
+            vehicle_msg.curtime = round(time.time() * 1000)
             vehicle_msg.slope = slope_abs
-            vehicle_msg.turn = turn - 0.50
-            vehicle_msg.speed = speed - 0.20
+            vehicle_msg.turn = turn
+            vehicle_msg.speed = speed
             self.publisher.publish(vehicle_msg)
             rospy.loginfo(vehicle_msg)
             return MOVE_RIGHT
@@ -348,7 +343,7 @@ class RoadDetection:
             CommandPublisher.set_speed(speed)
             CommandPublisher.set_turn(turn)
             print("----- move forward slope {:.3f} speed {:.3f} turn {:3f} ------".format(slope_abs, speed, turn))
-            vehicle_msg.curtime = round(time.time())
+            vehicle_msg.curtime = round(time.time() * 1000)
             vehicle_msg.slope = slope_abs
             vehicle_msg.turn = turn
             vehicle_msg.speed = speed

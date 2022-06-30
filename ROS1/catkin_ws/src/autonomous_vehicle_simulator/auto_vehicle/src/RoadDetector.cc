@@ -1,5 +1,9 @@
 
 #include "../include/RoadDetector.h"
+#include <ros/ros.h>
+
+#include <auto_vehicle_msgs/Status.h>
+
 
 // IMAGE BLURRING
 /**
@@ -8,6 +12,8 @@
  *@param lane is going to be detected
  *@return Blurred and denoised image
  */
+
+// auto_vehicle_msgs::Status vehicle_msg;
 cv::Mat RoadDetector::deNoise(const cv::Mat &inputImage) const
 {
     cv::Mat output;
@@ -104,6 +110,7 @@ const std::vector<std::vector<cv::Vec4i>>
 RoadDetector::lineSeparation(const std::vector<cv::Vec4i> &lines,
                              const cv::Mat &img_edges)
 {
+    // auto_vehicle_msgs::Status vehicle_msg;
     std::vector<std::vector<cv::Vec4i>> output(2);
     size_t j = 0;
     cv::Point ini;
@@ -131,6 +138,10 @@ RoadDetector::lineSeparation(const std::vector<cv::Vec4i> &lines,
             slopes.push_back(slope);
             selected_lines.push_back(i);
         }
+        //std::cout<<"slope value " <<abs(slope)<<std::endl;
+        // vehicle_msg.slope = abs(slope);
+        // status_pub.publish(vehicle_msg);
+
     }
 
     // Split the lines into right and left lines
@@ -164,6 +175,9 @@ const std::string &RoadDetector::getDirectionFromLines(
     const std::vector<std::vector<cv::Vec4i>> &left_right_lines,
     const cv::Mat &inputImage)
 {
+    
+    
+ 
     std::vector<cv::Point> output(4);
     cv::Point ini;
     cv::Point fini;
@@ -173,6 +187,7 @@ const std::string &RoadDetector::getDirectionFromLines(
     cv::Vec4d left_line;
     std::vector<cv::Point> right_pts;
     std::vector<cv::Point> left_pts;
+    
 
     // If right lines are being detected, fit a line using all the init and final
     // points of the lines

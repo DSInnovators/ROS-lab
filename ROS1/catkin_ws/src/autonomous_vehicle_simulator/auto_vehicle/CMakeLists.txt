@@ -5,25 +5,28 @@ project(auto_vehicle)
 find_package(catkin REQUIRED 
   COMPONENTS 
   roscpp 
+  auto_vehicle_msgs
   rospy 
   std_msgs 
   sensor_msgs 
   genmsg   
   cv_bridge
-  image_transport)
+  image_transport
+  )
 find_package(OpenCV 4.2.0 REQUIRED)
+
 
 # ## Declare ROS messages and services
 # add_message_files(DIRECTORY msg FILES Num.msg)
 # add_service_files(DIRECTORY srv FILES AddTwoInts.srv)
 
 ## Generate added messages and services
-generate_messages(DEPENDENCIES std_msgs sensor_msgs)
+generate_messages(DEPENDENCIES std_msgs sensor_msgs geometry_msgs)
 
 ## Declare a catkin package
 catkin_package(INCLUDE_DIRS include
    LIBRARIES ${PROJECT_NAME}
-   CATKIN_DEPENDS roscpp
+   CATKIN_DEPENDS auto_vehicle_msgs roscpp
    DEPENDS eigen opencv)
 
 ## Build talker and listener
@@ -36,7 +39,10 @@ add_executable(automate_vehicle
   src/automate_vehicle.cc
   src/RoadDetector.cc)
 target_link_libraries(automate_vehicle ${catkin_LIBRARIES})
-add_dependencies(automate_vehicle auto_vehicle_generate_messages_cpp)
+add_dependencies(automate_vehicle ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+
+
+# add_dependencies(automate_vehicle auto_vehicle_generate_messages_cpp)
 
 # add_executable(listener src/listener.cpp)
 # target_link_libraries(listener ${catkin_LIBRARIES})

@@ -36,7 +36,13 @@ road_detection = None
 def move_vehicle(direction):
     # command_publisher = CommandPublisher()
     # global key_code
+    print("move vehicle called")
     global command_publisher
+    command_publisher.speed = rospy.get_param("~speed", 0.15)
+    command_publisher.turn = rospy.get_param("~turn", 0.15)
+    print(command_publisher.speed)
+
+
     key_code = 'i'
     if direction == MOVE_LEFT:
         key_code = 'u'

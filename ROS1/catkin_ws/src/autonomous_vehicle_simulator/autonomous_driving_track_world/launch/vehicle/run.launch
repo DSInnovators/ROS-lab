@@ -6,6 +6,7 @@
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
    <arg name="world_name" value="$(find autonomous_driving_track_world)/worlds/road_track.world"/>
    <arg name="use_sim_time" value="true"/>
+   <arg name="verbose" value="true"/>
     <!-- more default parameters can be changed here -->
   </include>
 
