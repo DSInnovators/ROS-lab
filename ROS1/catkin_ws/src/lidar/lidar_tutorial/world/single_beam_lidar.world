@@ -1,0 +1,92 @@
+<sdf version='1.7'>
+  <world name='default'>
+    <!-- Ground Plane -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <model name='lidar_world'>
+
+      <!-- Hokuyo Laser -->
+      <link name="hokuyo_link">
+        <collision name="lidar_body_collision">
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+          <geometry>
+            <box>
+              <size>0.1 0.1 0.1</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="lidar_body_visual">
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+          <geometry>
+            <box>
+              <size>0.1 0.1 0.1</size>
+            </box>
+            <!--<mesh filename="package://rrbot_description/meshes/hokuyo.dae"/>-->
+          </geometry>
+        </visual>
+
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.0937526</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.227086</iyy>
+            <iyz>0</iyz>
+            <izz>0.227085</izz>
+          </inertia>
+        </inertial>
+
+        <sensor name='head_hokuyo_sensor' type='ray'> <!-- GPU plugin type=gpu_ray -->
+          <visualize>1</visualize>
+          <update_rate>20</update_rate>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>720</samples>
+                <resolution>1</resolution>
+                <min_angle>-1.5708</min_angle>
+                <max_angle>1.5708</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>1</samples>
+                <min_angle>0</min_angle>
+                <max_angle>0</max_angle>
+              </vertical>
+            </scan>
+            <range>
+              <min>0.1</min>
+              <max>10</max>
+              <resolution>0.01</resolution>
+            </range>
+            <noise>
+              <type>gaussian</type>
+              <mean>0</mean>
+              <stddev>0.01</stddev>
+            </noise>
+          </ray>
+          <!--<plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_gpu_laser.so">-->
+          <plugin name='gazebo_ros_head_hokuyo_controller' filename='libgazebo_ros_laser.so'>
+            <topicName>/scan</topicName>
+            <frameName>/laser_link</frameName>
+            <robotNamespace>/</robotNamespace>
+          </plugin>
+          <pose>0 0 0 0 -0 0</pose>
+        </sensor>
+      </link>
+
+      <!--<plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_gpu_laser.so">
+        <topicName>/rrbot/laser/scan</topicName>
+        <frameName>hokuyo_link</frameName>
+      </plugin>-->
+    </model>
+  </world>
+</sdf>

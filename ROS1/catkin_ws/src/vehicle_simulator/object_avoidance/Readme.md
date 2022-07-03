@@ -2,12 +2,13 @@
 ```sh
 
 # Python
-$ roslaunch object_avoidance gazebo_vehicle_control.launch
+$ roslaunch gazebo_vehicle_contorl gazebo_vehicle_control.launch
 $ python3 object_avoiding.py
 $ python3 object_detecting.py
 
 # CPP
-
+$ roslaunch gazebo_vehicle_contorl gazebo_vehicle_control.launch
+$ rosrun object_avoidance object_avoidance
 ```
 
 
