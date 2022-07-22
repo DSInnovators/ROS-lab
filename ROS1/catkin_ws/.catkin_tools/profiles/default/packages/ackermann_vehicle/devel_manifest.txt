@@ -1,0 +1,2 @@
+ackermann_vehicle/ackermann_vehicle
+/home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/.private/ackermann_vehicle/cmake.lock /home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/./cmake.lock

@@ -36,8 +36,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
-<robot name="em_3905"
-  xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="em_3905" xmlns:xacro="http://www.ros.org/wiki/xacro">
   <!-- Degree-to-radian conversions -->
   <xacro:property name="degrees_45" value="0.785398163"/>
   <xacro:property name="degrees_90" value="1.57079633"/>
@@ -134,23 +133,33 @@ limitations under the License.
 
   <!-- Inertia of a solid cuboid. Width is measured along the x axis, depth
        along the y axis, and height along the z axis. -->
-  <xacro:macro name="solid_cuboid_inertial" params="width depth height mass *origin">
+  <xacro:macro name="solid_cuboid_inertial"
+               params="width depth height mass *origin">
     <inertial>
       <xacro:insert_block name="origin"/>
       <mass value="${mass}"/>
-      <inertia ixx="${mass * (depth * depth + height * height) / 12}" ixy="0" ixz="0" iyy="${mass * (width * width + height * height) / 12}" iyz="0" izz="${mass * (width * width + depth * depth) / 12}"/>
+      <inertia ixx="${mass * (depth * depth + height * height) / 12}"
+               ixy="0" ixz="0"
+               iyy="${mass * (width * width + height * height) / 12}"
+               iyz="0"
+               izz="${mass * (width * width + depth * depth) / 12}"/>
     </inertial>
   </xacro:macro>
 
   <!-- Inertia of a thick-walled cylindrical tube with open ends. Height is
        measured along the z axis, which is the tube's axis. inner_rad and
        outer_rad are the tube's inner and outer radii, respectively. -->
-  <xacro:macro name="thick_walled_tube_inertial" params="inner_rad outer_rad height mass">
+  <xacro:macro name="thick_walled_tube_inertial"
+               params="inner_rad outer_rad height mass">
     <inertial>
       <mass value="${mass}"/>
       <inertia ixx="${(1 / 12) * mass * (3 * (inner_rad * inner_rad +
-                    outer_rad * outer_rad) + height * height)}" ixy="0" ixz="0" iyy="${(1 / 12) * mass * (3 * (inner_rad * inner_rad +
-                    outer_rad * outer_rad) + height * height)}" iyz="0" izz="${mass * (inner_rad * inner_rad +
+                    outer_rad * outer_rad) + height * height)}"
+               ixy="0" ixz="0"
+               iyy="${(1 / 12) * mass * (3 * (inner_rad * inner_rad +
+                    outer_rad * outer_rad) + height * height)}"
+               iyz="0"
+               izz="${mass * (inner_rad * inner_rad +
                     outer_rad * outer_rad) / 2}"/>
     </inertial>
   </xacro:macro>
@@ -162,7 +171,8 @@ limitations under the License.
       <child link="${prefix}_battery_offset"/>
       <origin xyz="${battery_x_offset - battery_length / 2}
                    ${reflect * battery_dist / 2}
-                   0" rpy="${reflect * battery_comp_angle} 0 0"/>
+                   0"
+              rpy="${reflect * battery_comp_angle} 0 0"/>
     </joint>
 
     <link name="${prefix}_battery_offset">
@@ -191,7 +201,9 @@ limitations under the License.
         </geometry>
       </collision>
 
-      <xacro:solid_cuboid_inertial width="${battery_length}" depth="${battery_width}" height="${battery_height}" mass="${battery_mass}">
+      <xacro:solid_cuboid_inertial
+         width="${battery_length}" depth="${battery_width}"
+         height="${battery_height}" mass="${battery_mass}">
         <origin/>
       </xacro:solid_cuboid_inertial>
     </link>
@@ -202,7 +214,8 @@ limitations under the License.
   </xacro:macro>
 
   <!-- Shock absorber -->
-  <xacro:macro name="shock" params="lr_prefix fr_prefix lr_reflect fr_reflect child">
+  <xacro:macro name="shock"
+               params="lr_prefix fr_prefix lr_reflect fr_reflect child">
     <joint name="${lr_prefix}_${fr_prefix}_shock" type="prismatic">
       <parent link="chassis"/>
       <child link="${child}"/>
@@ -211,7 +224,8 @@ limitations under the License.
                    ${lr_reflect * ((hex_hub_dist / 2) - axle_length)}
                    ${(wheel_travel / 2) - shock_z_offset}"/>
       <axis xyz="0 0 -1"/>
-      <limit lower="${-wheel_travel / 2}" upper="${wheel_travel / 2}" effort="${shock_eff_limit}" velocity="${shock_vel_limit}"/>
+      <limit lower="${-wheel_travel / 2}" upper="${wheel_travel / 2}"
+             effort="${shock_eff_limit}" velocity="${shock_vel_limit}"/>
     </joint>
     <transmission name="${lr_prefix}_${fr_prefix}_shock_trans">
       <type>transmission_interface/SimpleTransmission</type>
@@ -277,7 +291,9 @@ limitations under the License.
         </geometry>
       </collision>
 
-      <xacro:thick_walled_tube_inertial inner_rad="${hub_dia / 2}" outer_rad="${tire_dia / 2}" height="${tire_width}" mass="${wheel_mass}"/>
+      <xacro:thick_walled_tube_inertial
+          inner_rad="${hub_dia / 2}" outer_rad="${tire_dia / 2}"
+          height="${tire_width}" mass="${wheel_mass}"/>
     </link>
 
     <gazebo reference="${lr_prefix}_${fr_prefix}_wheel">
@@ -286,8 +302,11 @@ limitations under the License.
   </xacro:macro>
 
   <!-- Front wheel -->
-  <xacro:macro name="front_wheel" params="lr_prefix fr_prefix lr_reflect fr_reflect">
-    <xacro:shock lr_prefix="${lr_prefix}" fr_prefix="${fr_prefix}" lr_reflect="${lr_reflect}" fr_reflect="${fr_reflect}" child="${lr_prefix}_steering_link"/>
+  <xacro:macro name="front_wheel"
+               params="lr_prefix fr_prefix lr_reflect fr_reflect">
+    <xacro:shock lr_prefix="${lr_prefix}" fr_prefix="${fr_prefix}"
+                 lr_reflect="${lr_reflect}" fr_reflect="${fr_reflect}"
+                 child="${lr_prefix}_steering_link"/>
 
     <link name="${lr_prefix}_steering_link">
       <xacro:null_inertial/>
@@ -297,7 +316,8 @@ limitations under the License.
       <parent link="${lr_prefix}_steering_link"/>
       <child link="${lr_prefix}_${fr_prefix}_axle_carrier"/>
       <axis xyz="0 0 1"/>
-      <limit lower="${-degrees_45}" upper="${degrees_45}" effort="${servo_stall_torque}" velocity="${servo_no_load_speed}"/>
+      <limit lower="${-degrees_45}" upper="${degrees_45}"
+             effort="${servo_stall_torque}" velocity="${servo_no_load_speed}"/>
     </joint>
     <transmission name="${lr_prefix}_steering_trans">
       <type>transmission_interface/SimpleTransmission</type>
@@ -312,13 +332,18 @@ limitations under the License.
       </actuator>
     </transmission>
 
-    <xacro:wheel lr_prefix="${lr_prefix}" fr_prefix="${fr_prefix}" lr_reflect="${lr_reflect}"/>
+    <xacro:wheel lr_prefix="${lr_prefix}" fr_prefix="${fr_prefix}"
+                 lr_reflect="${lr_reflect}"/>
   </xacro:macro>
 
   <!-- Rear wheel -->
-  <xacro:macro name="rear_wheel" params="lr_prefix fr_prefix lr_reflect fr_reflect">
-    <xacro:shock lr_prefix="${lr_prefix}" fr_prefix="${fr_prefix}" lr_reflect="${lr_reflect}" fr_reflect="${fr_reflect}" child="${lr_prefix}_${fr_prefix}_axle_carrier"/>
-    <xacro:wheel lr_prefix="${lr_prefix}" fr_prefix="${fr_prefix}" lr_reflect="${lr_reflect}"/>
+  <xacro:macro name="rear_wheel"
+               params="lr_prefix fr_prefix lr_reflect fr_reflect">
+    <xacro:shock lr_prefix="${lr_prefix}" fr_prefix="${fr_prefix}"
+                 lr_reflect="${lr_reflect}" fr_reflect="${fr_reflect}"
+                 child="${lr_prefix}_${fr_prefix}_axle_carrier"/>
+    <xacro:wheel lr_prefix="${lr_prefix}" fr_prefix="${fr_prefix}"
+                 lr_reflect="${lr_reflect}"/>
   </xacro:macro>
 
   <!-- base_link must have geometry so that its axes can be displayed in
@@ -352,7 +377,9 @@ limitations under the License.
       </geometry>
     </collision>
 
-    <xacro:solid_cuboid_inertial width="${chassis_length}" depth="${chassis_width}" height="${chassis_height}" mass="${chassis_mass}">
+    <xacro:solid_cuboid_inertial
+        width="${chassis_length}" depth="${chassis_width}"
+        height="${chassis_height}" mass="${chassis_mass}">
       <origin xyz="0 0 ${-chassis_height / 2}"/>
     </xacro:solid_cuboid_inertial>
   </link>
@@ -370,141 +397,73 @@ limitations under the License.
   <xacro:battery prefix="right" reflect="-1"/>
 
   <!-- Wheels -->
-  <xacro:front_wheel lr_prefix="left" fr_prefix="front" lr_reflect="1" fr_reflect="1"/>
-  <xacro:front_wheel lr_prefix="right" fr_prefix="front" lr_reflect="-1" fr_reflect="1"/>
-  <xacro:rear_wheel lr_prefix="left" fr_prefix="rear" lr_reflect="1" fr_reflect="-1"/>
-  <xacro:rear_wheel lr_prefix="right" fr_prefix="rear" lr_reflect="-1" fr_reflect="-1"/>
-
-<!-- 
-  <link name="camera_link">
-    <pose frame="">
-					1 0 0.5 0 -0 0
-    </pose>
-    <inertial>
-      <inertia>
-        <ixx>
-							1
-        </ixx>
-        <ixy>
-							0
-        </ixy>
-        <ixz>
-							0
-        </ixz>
-        <iyy>
-							1
-        </iyy>
-        <iyz>
-							0
-        </iyz>
-        <izz>
-							1
-        </izz>
-      </inertia>
-      <mass>
-						1.0
-      </mass>
-    </inertial>
-    <collision name="my_collision">
-      <pose>
-						0 0 0.5 0 0 0
-      </pose>
-      <geometry>
-        <box>
-          <size>
-								1 1 1
-          </size>
-        </box>
-      </geometry>
-    </collision>
-    <visual name="my_visual">
-      <geometry>
-        <box>
-          <size>
-								0.005 0.005 0.005
-          </size>
-        </box>
-      </geometry>
-    </visual>
-    <sensor type="camera" name="my_camera">
-      <camera>
-        <horizontal_fov>
-							2.547
-        </horizontal_fov>
-        <image>
-          <width>
-								800
-          </width>
-          <height>
-								600
-          </height>
-        </image>
-        <clip>
-          <near>
-								0.01
-          </near>
-          <far>
-								100
-          </far>
-        </clip>
-      </camera>
-      <always_on>
-						1
-      </always_on>
-      <update_rate>
-						10
-      </update_rate>
-      <visualize>
-						true
-      </visualize>
-
-    </sensor>
-  </link>
-  <gazebo>
-    <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
-      <alwaysOn>
-							true
-      </alwaysOn>
-      <updateRate>
-							0.0
-      </updateRate>
-      <cameraName link= "vehicle_camera" />
-      <imageTopicName link= "image_raw" />
-      <cameraInfoTopicName link= "camera_info" />
-      <frameName link= "camera_link" />
-      <hackBaseline>
-							0.07
-      </hackBaseline>
-      <distortionK1>
-							0.0
-      </distortionK1>
-      <distortionK2>
-							0.0
-      </distortionK2>
-      <distortionK3>
-							0.0
-      </distortionK3>
-      <distortionT1>
-							0.0
-      </distortionT1>
-      <distortionT2>
-							0.0
-      </distortionT2>
-    </plugin>
-  </gazebo> -->
-
-  <!-- <gazebo reference="camera_link">
-    <material>Gazebo/White</material>
-  </gazebo>
-  <joint name="camera_joint" type="fixed">
-    <parent link="chassis"/>
-    <child link= "camera_link" />
-  </joint> -->
-
+  <xacro:front_wheel lr_prefix="left" fr_prefix="front"
+                     lr_reflect="1" fr_reflect="1"/>
+  <xacro:front_wheel lr_prefix="right" fr_prefix="front"
+                     lr_reflect="-1" fr_reflect="1"/>
+  <xacro:rear_wheel lr_prefix="left" fr_prefix="rear"
+                    lr_reflect="1" fr_reflect="-1"/>
+  <xacro:rear_wheel lr_prefix="right" fr_prefix="rear"
+                    lr_reflect="-1" fr_reflect="-1"/>
 
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so"/>
   </gazebo>
-
-
+  <joint name="camera_joint" type="fixed">
+    <origin rpy="0 1.0 0" xyz="0.8765 0 1.292"/>
+    <parent link="chassis"/>
+    <child link="camera"/>
+  </joint>
+  <link name="camera">
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size=".05 .05 .05"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size=".05 .05 .05"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <inertial>
+      <mass value="0.05"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="2.08333333333e-05" ixy="0" ixz="0" iyy="2.08333333333e-05" iyz="0" izz="2.08333333333e-05"/>
+    </inertial>
+  </link>
+  <gazebo reference="camera">
+    <material>Gazebo/Blue</material>
+    <sensor name="camera1" type="camera">
+      <update_rate>30.0</update_rate>
+      <camera name="head">
+        <horizontal_fov>1.3962634</horizontal_fov>
+        <image>
+          <width>1600</width>
+          <height>1600</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>
+        </clip>
+      </camera>
+      <plugin filename="libgazebo_ros_camera.so" name="camera_controller">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>camera1</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>camera_link</frameName>
+        <hackBaseline>0.07</hackBaseline>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+      </plugin>
+    </sensor>
+  </gazebo>
 </robot>

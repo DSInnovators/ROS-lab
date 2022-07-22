@@ -1,0 +1,8 @@
+Symlinking /home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/share/auto_vehicle/cmake/auto_vehicle-msg-extras.cmake
+Symlinking /home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/share/auto_vehicle/cmake/auto_vehicle-msg-paths.cmake
+Symlinking /home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/share/auto_vehicle/cmake/auto_vehicleConfig-version.cmake
+Symlinking /home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/share/auto_vehicle/cmake/auto_vehicleConfig.cmake
+Symlinking /home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/share/roseus/ros/auto_vehicle/manifest.l
+Symlinking /home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/lib/auto_vehicle/automate_vehicle
+Symlinking /home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/lib/python3/dist-packages/auto_vehicle/__init__.py
+Symlinking /home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/lib/pkgconfig/auto_vehicle.pc

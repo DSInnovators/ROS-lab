@@ -1,0 +1,6 @@
+gazebo_plugin_tutorial
+/home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/.private/gazebo_plugin_tutorial/cmake.lock /home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/./cmake.lock
+/home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/.private/gazebo_plugin_tutorial/share/gazebo_plugin_tutorial/cmake/gazebo_plugin_tutorialConfig-version.cmake /home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/share/gazebo_plugin_tutorial/cmake/gazebo_plugin_tutorialConfig-version.cmake
+/home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/.private/gazebo_plugin_tutorial/share/gazebo_plugin_tutorial/cmake/gazebo_plugin_tutorialConfig.cmake /home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/share/gazebo_plugin_tutorial/cmake/gazebo_plugin_tutorialConfig.cmake
+/home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/.private/gazebo_plugin_tutorial/lib/libgazebo_plugin_tutorial.so /home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/lib/libgazebo_plugin_tutorial.so
+/home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/.private/gazebo_plugin_tutorial/lib/pkgconfig/gazebo_plugin_tutorial.pc /home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/lib/pkgconfig/gazebo_plugin_tutorial.pc

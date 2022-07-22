@@ -35,6 +35,7 @@ def cmd_callback(data):
     msg.speed = v
     
     pub.publish(msg)
+    print(v)
 
   else:
     v = data.linear.x
@@ -66,7 +67,7 @@ if __name__ == '__main__':
       pub = rospy.Publisher(ackermann_cmd_topic, AckermannDriveStamped, queue_size=1)
     
     rospy.loginfo("Node 'cmd_vel_to_ackermann_drive' started.\nListening to %s, publishing to %s. Frame id: %s, wheelbase: %f", "/cmd_vel", ackermann_cmd_topic, frame_id, wheelbase)
-    
+    print(ackermann_cmd_topic)
     rospy.spin()
     
   except rospy.ROSInterruptException:

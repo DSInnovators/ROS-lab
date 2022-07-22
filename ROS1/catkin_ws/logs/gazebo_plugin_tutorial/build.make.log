@@ -1,0 +1,4 @@
+[35m[1mScanning dependencies of target gazebo_plugin_tutorial[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/gazebo_plugin_tutorial.dir/src/hello_world.cc.o[0m
+[100%] [32m[1mLinking CXX shared library /home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/.private/gazebo_plugin_tutorial/lib/libgazebo_plugin_tutorial.so[0m
+[100%] Built target gazebo_plugin_tutorial

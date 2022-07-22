@@ -1,0 +1,5 @@
+Symlinking /home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/share/ackermann_vehicle_gazebo/cmake/ackermann_vehicle_gazeboConfig-version.cmake
+Symlinking /home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/share/ackermann_vehicle_gazebo/cmake/ackermann_vehicle_gazeboConfig.cmake
+Symlinking /home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/lib/ackermann_vehicle_gazebo/ackermann_controller
+Symlinking /home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/lib/ackermann_vehicle_gazebo/cmake.lock
+Symlinking /home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/lib/pkgconfig/ackermann_vehicle_gazebo.pc
