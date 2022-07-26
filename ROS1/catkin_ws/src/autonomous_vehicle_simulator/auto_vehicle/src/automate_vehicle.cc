@@ -14,29 +14,32 @@ ros::Publisher pub;
 std::shared_ptr<CommandPublisher> pcmdPublisher;
 
 void moveVehicle(const std::string direction,
-                 std::shared_ptr<CommandPublisher> pcmdPublisher)
+                 std::shared_ptr<CommandPublisher> pcmdPublisher, std::vector<cv::Vec4i> lines)
 {
-    pcmdPublisher->setSpeed(0.15);
-    pcmdPublisher->setTurn(0.15);
+
     char key_code = 'i';
     if (direction == MOVE_LEFT)
         key_code = 'u';
+        pcmdPublisher->setSpeed(0.3);
+        pcmdPublisher->setTurn(0.5);
     if (direction == MOVE_RIGHT)
         key_code = 'o';
+        pcmdPublisher->setSpeed(0.3);
+        pcmdPublisher->setTurn(0.5);
     if (direction == TURN_LEFT)
         key_code = 'j';
     if (direction == TURN_RIGHT)
         key_code = 'l';
     if (direction == MOVE_FORWARD)
     {
-        pcmdPublisher->setSpeed(0.3);
+        pcmdPublisher->setSpeed(0.4);
         pcmdPublisher->setTurn(0.0);
         key_code = 'i';
     }
     if (direction == MOVE_STOP)
         key_code = 't';
 
-    pcmdPublisher->publishCommand(key_code, pub);
+    pcmdPublisher->publishCommand(key_code, pub, lines);
 }
 
 void imageCallback(const sensor_msgs::ImageConstPtr &msg)
@@ -50,7 +53,6 @@ void imageCallback(const sensor_msgs::ImageConstPtr &msg)
     std::string direction;
     // int flag_plot = -1;
     // int i = 0;
-    
 
     RoadDetector roadDetector;
     try
@@ -76,7 +78,7 @@ void imageCallback(const sensor_msgs::ImageConstPtr &msg)
             direction = roadDetector.getDirectionFromLines(left_right_lines, imgFrame);
 
             // move the vehicle
-            moveVehicle(direction, pcmdPublisher);
+            moveVehicle(direction, pcmdPublisher, lines);
 
             // i += 1;
             // // cv::waitKey(25);
@@ -85,7 +87,6 @@ void imageCallback(const sensor_msgs::ImageConstPtr &msg)
         // {
         //     flag_plot = -1;
         // }
-
     }
     catch (cv_bridge::Exception &e)
     {

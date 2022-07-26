@@ -1,7 +1,0 @@
-ackermann_vehicle/ackermann_vehicle_gazebo
-/home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/.private/ackermann_vehicle_gazebo/cmake.lock /home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/./cmake.lock
-/home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/.private/ackermann_vehicle_gazebo/share/ackermann_vehicle_gazebo/cmake/ackermann_vehicle_gazeboConfig-version.cmake /home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/share/ackermann_vehicle_gazebo/cmake/ackermann_vehicle_gazeboConfig-version.cmake
-/home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/.private/ackermann_vehicle_gazebo/share/ackermann_vehicle_gazebo/cmake/ackermann_vehicle_gazeboConfig.cmake /home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/share/ackermann_vehicle_gazebo/cmake/ackermann_vehicle_gazeboConfig.cmake
-/home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/.private/ackermann_vehicle_gazebo/lib/ackermann_vehicle_gazebo/ackermann_controller /home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/lib/ackermann_vehicle_gazebo/ackermann_controller
-/home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/.private/ackermann_vehicle_gazebo/lib/ackermann_vehicle_gazebo/cmake.lock /home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/lib/ackermann_vehicle_gazebo/cmake.lock
-/home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/.private/ackermann_vehicle_gazebo/lib/pkgconfig/ackermann_vehicle_gazebo.pc /home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/lib/pkgconfig/ackermann_vehicle_gazebo.pc

@@ -71,13 +71,33 @@ public:
 
     const std::string &getDirection() const { return direction; }
 
-    void publishCommand(const char key_code, const ros::Publisher &pub)
+    void publishCommand(const char key_code, const ros::Publisher &pub, std::vector<cv::Vec4i> lines)
     {
         // Create Twist message
         geometry_msgs::Twist twist;
 
+        double slope;
+
+        cv::Point ini;
+        cv::Point fini;
+        double slope_thresh = 1;
+
+        for (auto i : lines)
+        {
+            ini = cv::Point(i[0], i[1]);
+            fini = cv::Point(i[2], i[3]);
+
+            // Basic algebra: slope = (y1 - y0)/(x1 - x0)
+            slope =
+                (static_cast<double>(fini.y) - static_cast<double>(ini.y)) /
+                (static_cast<double>(fini.x) - static_cast<double>(ini.x));
+
+            
+        }
+
         // Get the key
         key = key_code;
+        std::cout << "Slope ...." << slope << std::endl;
 
         // If the key corresponds to a key in moveBindings
         if (moveBindings.count(key) == 1)
@@ -114,6 +134,14 @@ public:
                 return;
             }
         }
+
+        if(std::abs(slope) > 20) {
+            turn = turn + 0.1;
+        } 
+        // if (std::abs(slope) > slope_thresh && std::abs(slope) < 30)
+        // {
+        //    turn = -0.4;
+        // } 
 
         // Update the Twist message
         twist.linear.x = x * speed;

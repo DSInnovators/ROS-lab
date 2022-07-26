@@ -1,1 +1,0 @@
-/home/rifat/code/ROS-lab/ROS1/catkin_ws/devel/./cmake.lock 32
