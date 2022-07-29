@@ -1,8 +1,8 @@
-## Autonomous Vehicle Simulator
+## Autonomous Vehicle Data Visualization
 
 #### Introduction
 
-This is a Differential Drive Robot in Gazebo.
+This is a Differential Drive Robot in Gazebo. Different kinds of data like Speed, Slope, Turn etc are visualized here.
 
 #### Environment Setup
 
@@ -33,11 +33,8 @@ $ printenv | grep ROS
 
 First, if you installed Gazebo from debians, make sure you've installed the Gazebo development files. If you installed Gazebo from source, you can ignore this step. If you have a release other than gazebo11, replace 11 with whatever version number you have.
 
-$ sudo apt-get install libgazebo11-dev
-$ sudo apt-get install libopencv-dev python3-opencv
-$ sudo apt-get install ros-noetic-cv-bridge
-$ sudo apt-get install python3-numpy
-$ sudo apt-get install python3-matplotlib
+$ sudo apt-get install libgazebo11-dev libopencv-dev python3-opencv ros-noetic-cv-bridge python3-numpy python3-matplotlib
+
 #### Installing and running the project
 
 To install this plugin project, git clone the repo
@@ -52,14 +49,14 @@ You will see like this.
 
 In seperate terminal, drive the vehicle.
 
-
 For Python application,
 
-$ rosrun autonomous_vehicle automate_vehicle.py
+$ rosrun auto_vehicle_analyzer automate_vehicle.py
 
-For C++ application,
+In seperate terminal, visualize the data.
 
-$ rosrun auto_vehicle automate_vehicle
+$ rosrun vehicle_data_visualization plot
+
 #### Output
 
-Vehicle will run on the road.
+Vehicle will run on the road and graph will be shown.
