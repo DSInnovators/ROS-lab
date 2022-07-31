@@ -51,9 +51,11 @@ void imageCallback(const sensor_msgs::ImageConstPtr &msg)
 
   cv::threshold(gray, gray, 160, 255, cv::THRESH_BINARY);
 
-  if (mask(gray, masked)) {
-    return;
-  }
+  // if (mask(gray, masked)) {
+  //   return;
+  // }
+
+  masked = gray;
 
   clipped = masked(cv::Rect(0, masked.rows / 3 * 2, masked.cols, masked.rows / 3));
 
@@ -87,6 +89,7 @@ void imageCallback(const sensor_msgs::ImageConstPtr &msg)
   }
 
   frame_pt.x = (centroid[0].x + centroid[1].x) / 2;
+  frame_pt.x = (centroid[0].x + (centroid[1].x - centroid[0].x) / 3);
   frame_pt.y = (centroid[0].y + centroid[1].y) / 2 + gray.rows / 3 * 2;
   cvtColor(clipped, clipped, cv::COLOR_GRAY2BGR);
 
