@@ -106,7 +106,7 @@ void imageCallback(const sensor_msgs::ImageConstPtr &msg)
   }
 
   geometry_msgs::Twist cmd_vel;
-  double x = std::abs(20.0 / error);
+  double x = std::abs(20.0 / error);  // 20 is empirically determined
   if (x > 0.5) {
     x = 0.5;
   }
@@ -114,7 +114,12 @@ void imageCallback(const sensor_msgs::ImageConstPtr &msg)
     x = 0.2;
   }
   cmd_vel.linear.x = x;
-  cmd_vel.angular.z = (error*PI/gray.cols);
+
+  // The unit is rad/s, so the multiplier is dependent on how much
+  // the angular speed is to be acted upon in this callback.
+  // But we don't know the image publishing rate.
+  // 2 seems to give a good result.
+  cmd_vel.angular.z = (error*PI/gray.cols) * 2;
 
   // std::cout << error << " " << cmd_vel.angular.z << " ";
   // std::cout << cmd_vel.linear.x << "\n";
