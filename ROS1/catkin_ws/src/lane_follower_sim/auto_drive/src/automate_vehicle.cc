@@ -106,8 +106,18 @@ void imageCallback(const sensor_msgs::ImageConstPtr &msg)
   }
 
   geometry_msgs::Twist cmd_vel;
+  double x = std::abs(20.0 / error);
+  if (x > 0.5) {
+    x = 0.5;
+  }
+  if (x < 0.2) {
+    x = 0.2;
+  }
+  cmd_vel.linear.x = x;
   cmd_vel.angular.z = (error*PI/gray.cols);
-  cmd_vel.linear.x = 0.3;
+
+  // std::cout << error << " " << cmd_vel.angular.z << " ";
+  // std::cout << cmd_vel.linear.x << "\n";
 
   pub.publish(cmd_vel);
 }
