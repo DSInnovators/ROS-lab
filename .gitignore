@@ -108,5 +108,11 @@ ROS2/**/build/
 **/venv
 
 # ROS1 build and devel folders
-ROS1/catkin_ws/build/
-ROS1/catkin_ws/devel/
+ROS1/catkin_ws/build
+ROS1/catkin_ws/devel
+ROS1/catkin_ws/logs
+ROS1/catkin_ws/.catkin_tools
+
+# vim
+Session.vim
+tags
